@@ -1,8 +1,8 @@
 package main.java;
 
 public class RewardValue {
-    private final double cashValue;
-    private final double milesValue;
+    private double cashValue;
+    private double milesValue;
 
     // Constructor that accepts a cash value
     public RewardValue(double cashValue) {
@@ -12,8 +12,13 @@ public class RewardValue {
 
     // Constructor that accepts a value in miles
     public RewardValue(double milesValue, boolean isMiles) {
-        this.milesValue = milesValue;
-        this.cashValue = milesToCash(milesValue);
+        if (isMiles) {
+            this.milesValue = milesValue;
+            this.cashValue = milesToCash(milesValue);
+        } else {
+            this.cashValue = milesValue;
+            this.milesValue = cashToMiles(milesValue);
+        }
     }
 
     // Method to get the cash value of the RewardValue
@@ -36,4 +41,3 @@ public class RewardValue {
         return cash / 0.0035;
     }
 }
-
